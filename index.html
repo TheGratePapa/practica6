@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Turismo</title>
+		<title>Practica 6 A01252280</title>
 	</head>
 	<body>
 		<script src="https://unpkg.com/vue@3"></script>
@@ -28,8 +28,36 @@
 			</div>
 		</div>
 
+    <div id="appc">
+      <p>Mensaje original: "{{ message }}"</p>
+      <p>Mensaje invertido computado: "{{ reversedMessage }}"</p>
+    </div>
+
+
+
+                                <!----SCRIPT--->
+
 		<script>
-			Vue.createApp({
+
+      Vue.createApp({
+				data() {
+					return {
+						message: 'a01252280',
+					};
+				},
+
+        methods: {
+          reversedMessage: function () {
+          this.message;
+          },
+        },
+
+
+			}).mount('#appc');
+
+
+
+      Vue.createApp({
 				data() {
 					return {
 						message: 'a01252280',
@@ -43,23 +71,22 @@
 						seen: 0,
 						text: 'teemplate',
 						ambato: [
-							{
-								text: 'Conocida como la tierra de las flores y de las frutas en Ecuador.',
-							},
-							{ text: 'Se encuentra en el centro del pais.' },
-							{ text: 'Esta entre las 5 ciudades mas importantes del país.' },
-							{
-								text: 'Es la cuna de los 3 Juanes: Juan Montalvo, Juan Leon Mera y Juan Beningo Vela.',
-							},
+							{ text: 'texto generico.'},
+              { text: 'texto generico.'},
 						],
 					};
 				},
+
 				methods: {
 					display: function () {
 						this.seen = !this.seen;
 					},
 				},
+
+
 			}).mount('#app2');
+
+
 		</script>
 	</body>
 </html>
