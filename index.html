@@ -1,92 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Practica 6 A01252280</title>
-	</head>
-	<body>
-		<script src="https://unpkg.com/vue@3"></script>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pagina de turismo A01252280</title> 
+    </head>
+    <body>
+   
+	<script src="https://unpkg.com/vue@3"></script>
 
-		<div id="app">{{ message }}</div>
+	<div id="app">
+   		<h3>Mejores lugares a viajar segun que temporada</h3>
+    	<ul>
+        	<li v-for="task in filteredTasks" :key="task.id">
+            	<input type="checkbox" v-model="task.done">
+            	<span :class="{ done: task.done }">{{ task.text }}</span>
+        	</li>
+    	</ul>
+    	<button @click="toogleHideCompleted">
+        	{{ hideCompleted ? 'Ocultar lugares' : 'mostrar lugares' }}
+    	</button>
 
-		<!--DIV 2-->
-		<div id="app2">
-			<p>{{ text }}</p>
-			<input v-model="text" placeholder="texto referencia" />
-			<br />
-			<br />
-			<button v-on:click="display">boton texto</button>
-			<div v-if="seen">
-				<br />
-				<img src="5.jpg" height="500" width="700" />
-
-				<ol>
-					<li v-for="texto remplazable">{{cualidad.text}}</li>
-				</ol>
-			</div>
-		</div>
-
-    <div id="appc">
-      <p>Mensaje original: "{{ message }}"</p>
-      <p>Mensaje invertido computado: "{{ reversedMessage }}"</p>
-    </div>
+		<h3>lugares seleccionados</h3>
+    	<ul>
+        	<li v-for="lugar in filteredLugares" :key="lugar.id">
+            	{{ lugar.text }}
+        	</li>
+    	</ul>
+	</div>
 
 
 
-                                <!----SCRIPT--->
+	<!---season-->
+	<div id="app3">
+		<h3>Temporada actual del año!!! </h3>
+		<p ref="sea">hello</p>
+	</div>
 
-		<script>
+	<style>
+    	.done { text-decoration: underline overline red; }
+	</style>
 
-      Vue.createApp({
-				data() {
-					return {
-						message: 'a01252280',
-					};
-				},
-
-        methods: {
-          reversedMessage: function () {
-          this.message;
-          },
-        },
-
-
-			}).mount('#appc');
-
-
-
-      Vue.createApp({
-				data() {
-					return {
-						message: 'a01252280',
-					};
-				},
-			}).mount('#app');
-
-			Vue.createApp({
-				data() {
-					return {
-						seen: 0,
-						text: 'teemplate',
-						ambato: [
-							{ text: 'texto generico.'},
-              { text: 'texto generico.'},
+	<script>
+    	let id = 0;
+    	Vue.createApp({
+        	data(){
+            	return {
+                	hideCompleted: false,
+                	tasks: [
+                    	{ id: id++, text: 'primavera', done: false },
+                    	{ id: id++, text: 'verano', done: false },
+                    	{ id: id++, text: 'otoño', done: false },
+                    	{ id: id++, text: 'invierno', done: false },
+						{ id: id++, text: 'cualquier temporada', done: false }	
 						],
-					};
-				},
 
-				methods: {
-					display: function () {
-						this.seen = !this.seen;
-					},
-				},
+					lugares:[
+					{ id: id++, text: 'primavera', done: false },
+                    { id: id++, text: 'verano', done: false },
+                    { id: id++, text: 'otoño', done: false },
+                    { id: id++, text: 'invierno', done: false },
+					{ id: id++, text: 'cualquier temporada', done: false }	
+
+					]
+            	}
+        	},
+        	methods: {
+            	toogleHideCompleted(){
+                	this.hideCompleted = !this.hideCompleted
+            	},
+				toogleHideSelected(){
+                	this.hideCompleted = !this.hideCompleted
+            	}
+        	},
+        	computed: {
+            	filteredTasks() {
+                	return this.hideCompleted
+                    	? this.tasks.filter(p => !p.done)
+                    	: this.tasks
+            	},
+				filteredLugares(){
+					return this.hideCompleted
+						? this.lugares
+						: this.tasks.filter(p => !p.done)
+				}
+
+        	},
+    	}).mount('#app')
 
 
-			}).mount('#app2');
+		Vue.createApp({
+        	
+            	mounted(){
+					var today = new Date();
+			
+					this.$refs.sea.textContent = 'invierno'
+
+					if ( 3 <= today.getMonth()) {
+						this.$refs.sea.textContent = 'primavera'
+    				}
+
+    				if (6 <= today.getMonth()) {
+						this.$refs.sea.textContent = 'Verano'
+    				}
+
+    				if (9 <= today.getMonth()) {
+						this.$refs.sea.textContent = 'Otoño'
+   					 }			
+				}
+        
+    	}).mount('#app3')
 
 
-		</script>
-	</body>
+
+	</script>
+   </body>
 </html>
